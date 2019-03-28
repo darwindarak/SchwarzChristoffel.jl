@@ -126,7 +126,7 @@ end
 
   zeta = [1.0+3.0im,-2.0-2.0im,0.0+1.1im]
   z = m(zeta)
-  @test isapprox(z,Complex128[0.269784+0.768849im,
+  @test isapprox(z,ComplexF64[0.269784+0.768849im,
                       -0.616452-0.470251im,
                       -0.0310697+0.138951im];atol=1e-5)
 

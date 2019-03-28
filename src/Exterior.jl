@@ -207,19 +207,19 @@ struct KarmanTrefftzMap <: ConformalMap
   ps::PowerSeries
 
   "control point coordinates in circle space"
-  ζ::Vector{Complex128}
+  ζ::Vector{ComplexF64}
 
   "control point coordinates in body-fixed space"
-  z::Vector{Complex128}
+  z::Vector{ComplexF64}
 
   "map Jacobian in body-fixed coordinates"
-  dzdζ::Vector{Complex128}
+  dzdζ::Vector{ComplexF64}
 
   "Area enclosed by the mapped shape"
   area      :: Float64
 
   "Centroid of the mapped shape"
-  Zc        :: Complex128
+  Zc        :: ComplexF64
 
   "2nd area moment of the mapped shape"
   J         :: Float64
@@ -282,7 +282,7 @@ function KarmanTrefftzMap(ν,ϵ,δ,C; N::Int = 200)
 
   # Compute power series coefficients
   ncoeff = 4
-  ccoeff = zeros(Complex128,ncoeff)
+  ccoeff = zeros(ComplexF64,ncoeff)
   ccoeff[1] = a
   ccoeff[2] = μ
   ccoeff[3] = (ν^2-1)*C/(3*a_C)
@@ -353,13 +353,13 @@ function Base.summary(m::KarmanTrefftzMap)
   println("Karman-Trefftz map of unit circle to exterior of airfoil")
   print("   ")
   print("circle center: ")
-  println("($(round(m.epsilon*cos(m.delta),4)),$(round(m.epsilon*sin(m.delta),4)))")
+  println("($(round(m.epsilon*cos(m.delta), digits=4)),$(round(m.epsilon*sin(m.delta), digits=4)))")
   print("   ")
   print("chord length: ")
   println("$(4*m.C)")
   print("   ")
   print("trailing edge angle (deg): ")
-  println("$(round((2-m.nu)*180,4))")
+  println("$(round((2-m.nu)*180, digits=4))")
 end
 
 
